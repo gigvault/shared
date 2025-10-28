@@ -15,7 +15,8 @@ import (
 // EnvelopeEncryption implements envelope encryption pattern
 // Master key is stored in HSM, data encryption keys are stored encrypted
 type EnvelopeEncryption struct {
-	hsm HSMInterface
+	hsm     HSMInterface
+	Storage *KeyStorage // Storage for encrypted keys
 }
 
 // HSMInterface defines the interface for HSM operations
@@ -42,9 +43,10 @@ type EncryptedKey struct {
 }
 
 // NewEnvelopeEncryption creates a new envelope encryption handler
-func NewEnvelopeEncryption(hsm HSMInterface) *EnvelopeEncryption {
+func NewEnvelopeEncryption(hsm HSMInterface, storage *KeyStorage) *EnvelopeEncryption {
 	return &EnvelopeEncryption{
-		hsm: hsm,
+		hsm:     hsm,
+		Storage: storage,
 	}
 }
 

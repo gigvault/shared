@@ -54,7 +54,7 @@ func hasValidKeyUsage(cert *x509.Certificate) bool {
 	// - DigitalSignature
 	// - KeyEncipherment (for RSA)
 	// - KeyAgreement (for ECDH)
-	
+
 	validUsages := []x509.KeyUsage{
 		x509.KeyUsageDigitalSignature,
 		x509.KeyUsageKeyEncipherment,
@@ -147,4 +147,3 @@ func CheckRevocation(cert *x509.Certificate) error {
 
 	return nil
 }
-
