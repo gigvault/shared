@@ -34,6 +34,11 @@ go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest
 echo "✅ Plugins installed"
 echo ""
 
+# Add Go bin to PATH
+export PATH="$PATH:$(go env GOPATH)/bin"
+echo "✅ Go bin added to PATH: $(go env GOPATH)/bin"
+echo ""
+
 # Generate Go code
 echo "🔨 Generating Go code from proto files..."
 echo ""
