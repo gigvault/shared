@@ -152,4 +152,3 @@ func (s *KeyStorage) Import(ctx context.Context, data []byte) error {
 
 	return s.Store(ctx, &key)
 }
-

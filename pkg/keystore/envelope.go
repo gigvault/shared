@@ -22,23 +22,23 @@ type EnvelopeEncryption struct {
 type HSMInterface interface {
 	// Encrypt encrypts data using the master key in HSM
 	Encrypt(plaintext []byte) ([]byte, error)
-	
+
 	// Decrypt decrypts data using the master key in HSM
 	Decrypt(ciphertext []byte) ([]byte, error)
-	
+
 	// Sign signs data using a key in HSM
 	Sign(keyID string, data []byte) ([]byte, error)
 }
 
 // EncryptedKey represents an encrypted private key
 type EncryptedKey struct {
-	KeyID          string // Unique identifier
-	EncryptedDEK   []byte // Data Encryption Key (encrypted with master key)
-	EncryptedKey   []byte // Actual private key (encrypted with DEK)
-	Nonce          []byte // Nonce for GCM
-	Algorithm      string // e.g., "ECDSA-P256"
-	CreatedAt      int64
-	RotatedAt      int64
+	KeyID        string // Unique identifier
+	EncryptedDEK []byte // Data Encryption Key (encrypted with master key)
+	EncryptedKey []byte // Actual private key (encrypted with DEK)
+	Nonce        []byte // Nonce for GCM
+	Algorithm    string // e.g., "ECDSA-P256"
+	CreatedAt    int64
+	RotatedAt    int64
 }
 
 // NewEnvelopeEncryption creates a new envelope encryption handler
@@ -212,4 +212,3 @@ func (e *EnvelopeEncryption) RotateKey(encKey *EncryptedKey) (*EncryptedKey, err
 
 	return newEncKey, nil
 }
-

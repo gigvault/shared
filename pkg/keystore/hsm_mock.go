@@ -25,7 +25,7 @@ func NewMockHSM() (*MockHSM, error) {
 	// Try to load master key from environment
 	keyStr := os.Getenv("HSM_MASTER_KEY")
 	var masterKey []byte
-	
+
 	if keyStr != "" {
 		decoded, err := base64.StdEncoding.DecodeString(keyStr)
 		if err != nil {
@@ -41,7 +41,7 @@ func NewMockHSM() (*MockHSM, error) {
 		if _, err := io.ReadFull(rand.Reader, masterKey); err != nil {
 			return nil, fmt.Errorf("failed to generate master key: %w", err)
 		}
-		
+
 		// Log the key for development (NEVER in production!)
 		encoded := base64.StdEncoding.EncodeToString(masterKey)
 		fmt.Printf("⚠️  DEV ONLY: HSM_MASTER_KEY=%s\n", encoded)
@@ -134,4 +134,3 @@ func (h *MockHSM) RotateMasterKey() error {
 	h.masterKey = newKey
 	return nil
 }
-
