@@ -33,7 +33,7 @@ func DefaultServerConfig(addr string, handler http.Handler) *ServerConfig {
 		Addr:              addr,
 		Handler:           handler,
 		ReadTimeout:       15 * time.Second,
-		ReadHeaderTimeout: 5 * time.Second,  // Slowloris protection
+		ReadHeaderTimeout: 5 * time.Second, // Slowloris protection
 		WriteTimeout:      15 * time.Second,
 		IdleTimeout:       60 * time.Second,
 		MaxHeaderBytes:    1 << 20, // 1 MB
@@ -73,7 +73,7 @@ func GracefulShutdown(srv *http.Server, timeout time.Duration) error {
 	defer cancel()
 
 	logger.Info("Shutting down HTTP server gracefully...")
-	
+
 	if err := srv.Shutdown(ctx); err != nil {
 		logger.Error("Server forced to shutdown", zap.Error(err))
 		return err
@@ -114,4 +114,3 @@ func StartWithGracefulShutdown(srv *http.Server, stopChan <-chan struct{}) error
 		return GracefulShutdown(srv, 30*time.Second)
 	}
 }
-

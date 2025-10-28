@@ -82,4 +82,3 @@ func TooManyRequestsError(w http.ResponseWriter) {
 		"rate_limit_exceeded",
 		"Too many requests. Please slow down.")
 }
-
