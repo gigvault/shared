@@ -105,4 +105,3 @@ func isServiceCertificate(cert interface{}) bool {
 	// Check CN, SAN, or custom OID for service identity
 	return true
 }
-

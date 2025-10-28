@@ -127,4 +127,3 @@ func (c *Claims) HasAnyRole(roles ...string) bool {
 	}
 	return false
 }
-

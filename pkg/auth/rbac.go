@@ -105,4 +105,3 @@ func RequirePermission(ctx context.Context, perm Permission) error {
 
 	return nil
 }
-

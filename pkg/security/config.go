@@ -20,14 +20,14 @@ type TLSConfig struct {
 
 // DatabaseSecurityConfig represents database security settings
 type DatabaseSecurityConfig struct {
-	SSLMode            string `yaml:"ssl_mode"` // require, verify-ca, verify-full
-	SSLCert            string `yaml:"ssl_cert"`
-	SSLKey             string `yaml:"ssl_key"`
-	SSLCA              string `yaml:"ssl_ca"`
-	EncryptionAtRest   bool   `yaml:"encryption_at_rest"`
-	ConnectionLimit    int    `yaml:"connection_limit"`
-	IdleConnLimit      int    `yaml:"idle_conn_limit"`
-	ConnMaxLifetime    int    `yaml:"conn_max_lifetime"` // seconds
+	SSLMode          string `yaml:"ssl_mode"` // require, verify-ca, verify-full
+	SSLCert          string `yaml:"ssl_cert"`
+	SSLKey           string `yaml:"ssl_key"`
+	SSLCA            string `yaml:"ssl_ca"`
+	EncryptionAtRest bool   `yaml:"encryption_at_rest"`
+	ConnectionLimit  int    `yaml:"connection_limit"`
+	IdleConnLimit    int    `yaml:"idle_conn_limit"`
+	ConnMaxLifetime  int    `yaml:"conn_max_lifetime"` // seconds
 }
 
 // SecurityConfig represents overall security configuration
@@ -163,4 +163,3 @@ func DefaultSecureConfig() SecurityConfig {
 		CORSOrigins:      []string{}, // Whitelist only
 	}
 }
-

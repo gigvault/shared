@@ -23,11 +23,11 @@ type visitor struct {
 }
 
 type tokenBucket struct {
-	tokens    int
-	maxTokens int
+	tokens     int
+	maxTokens  int
 	lastRefill time.Time
 	refillRate time.Duration
-	mu        sync.Mutex
+	mu         sync.Mutex
 }
 
 // NewRateLimiter creates a new rate limiter
@@ -131,4 +131,3 @@ func RateLimitMiddleware(limiter *RateLimiter) func(http.Handler) http.Handler {
 		})
 	}
 }
-

@@ -24,7 +24,7 @@ func NewSecretsManager() (*SecretsManager, error) {
 	// - AWS Secrets Manager
 	// - Azure Key Vault
 	// - Google Secret Manager
-	
+
 	key := os.Getenv("ENCRYPTION_KEY")
 	if key == "" {
 		return nil, errors.New("ENCRYPTION_KEY environment variable not set")
@@ -125,4 +125,3 @@ func GenerateEncryptionKey() (string, error) {
 	}
 	return base64.StdEncoding.EncodeToString(key), nil
 }
-
