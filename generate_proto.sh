@@ -74,8 +74,3 @@ echo "║        ✅ PROTOBUF GENERATION COMPLETED! ✅                       �
 echo "║                                                                   ║"
 echo "╚═══════════════════════════════════════════════════════════════════╝"
 echo ""
-echo "Now commit:"
-echo "  git add ."
-echo "  git commit -m \"feat: add gRPC protobuf definitions\""
-echo "  git tag -a v1.1.0 -m \"Release v1.1.0\""
-echo "  git push origin main && git push origin v1.1.0"

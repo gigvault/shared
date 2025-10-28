@@ -1,0 +1,54 @@
+syntax = "proto3";
+
+package gigvault.crl.v1;
+
+option go_package = "github.com/gigvault/shared/api/proto/crl;crlpb";
+
+import "google/protobuf/timestamp.proto";
+
+// CRLService handles Certificate Revocation List operations
+service CRLService {
+  // AddRevocation adds a revoked certificate to the CRL
+  rpc AddRevocation(AddRevocationRequest) returns (AddRevocationResponse);
+  
+  // GetCRL retrieves the current CRL
+  rpc GetCRL(GetCRLRequest) returns (GetCRLResponse);
+  
+  // PublishCRL generates and publishes a new CRL
+  rpc PublishCRL(PublishCRLRequest) returns (PublishCRLResponse);
+}
+
+message AddRevocationRequest {
+  string serial_number = 1;
+  google.protobuf.Timestamp revoked_at = 2;
+  string reason = 3; // unspecified, keyCompromise, cACompromise, etc.
+}
+
+message AddRevocationResponse {
+  bool success = 1;
+  string message = 2;
+}
+
+message GetCRLRequest {
+  string issuer = 1; // CA common name (optional)
+}
+
+message GetCRLResponse {
+  bytes crl_der = 1; // CRL in DER format
+  string crl_pem = 2; // CRL in PEM format
+  google.protobuf.Timestamp this_update = 3;
+  google.protobuf.Timestamp next_update = 4;
+  int32 revoked_count = 5;
+}
+
+message PublishCRLRequest {
+  bool force = 1; // Force generation even if not needed
+}
+
+message PublishCRLResponse {
+  bool success = 1;
+  string message = 2;
+  google.protobuf.Timestamp published_at = 3;
+  int32 revoked_count = 4;
+}
+

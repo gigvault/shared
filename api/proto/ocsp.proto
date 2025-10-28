@@ -1,0 +1,54 @@
+syntax = "proto3";
+
+package gigvault.ocsp.v1;
+
+option go_package = "github.com/gigvault/shared/api/proto/ocsp;ocspb";
+
+import "google/protobuf/timestamp.proto";
+
+// OCSPService handles Online Certificate Status Protocol operations
+service OCSPService {
+  // UpdateStatus updates the status of a certificate
+  rpc UpdateStatus(UpdateStatusRequest) returns (UpdateStatusResponse);
+  
+  // CheckStatus checks the status of a certificate
+  rpc CheckStatus(CheckStatusRequest) returns (CheckStatusResponse);
+  
+  // BatchUpdateStatus updates status for multiple certificates
+  rpc BatchUpdateStatus(BatchUpdateStatusRequest) returns (BatchUpdateStatusResponse);
+}
+
+message UpdateStatusRequest {
+  string serial_number = 1;
+  string status = 2; // good, revoked, unknown
+  google.protobuf.Timestamp revoked_at = 3; // Only for revoked status
+  string revocation_reason = 4; // Only for revoked status
+}
+
+message UpdateStatusResponse {
+  bool success = 1;
+  string message = 2;
+}
+
+message CheckStatusRequest {
+  string serial_number = 1;
+}
+
+message CheckStatusResponse {
+  string status = 1; // good, revoked, unknown
+  google.protobuf.Timestamp this_update = 2;
+  google.protobuf.Timestamp next_update = 3;
+  google.protobuf.Timestamp revoked_at = 4; // Only for revoked
+  string revocation_reason = 5; // Only for revoked
+}
+
+message BatchUpdateStatusRequest {
+  repeated UpdateStatusRequest updates = 1;
+}
+
+message BatchUpdateStatusResponse {
+  int32 success_count = 1;
+  int32 failure_count = 2;
+  repeated string errors = 3;
+}
+
