@@ -142,4 +142,3 @@ func (c *OCSPClient) validateResponse(resp *ocsp.Response, cert *x509.Certificat
 
 	return nil
 }
-

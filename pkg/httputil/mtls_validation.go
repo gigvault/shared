@@ -172,7 +172,7 @@ func checkOCSP(cert *x509.Certificate) error {
 	//
 	// For now, we skip if issuer is not available in the chain
 	// This is acceptable for MVP as the certificate chain is already validated
-	
+
 	// Note: Full OCSP implementation is available in ocsp_client.go
 	// and can be integrated when issuer certificate is accessible
 	return nil
@@ -192,7 +192,7 @@ func checkCRL(cert *x509.Certificate) error {
 	//
 	// For now, we skip if issuer is not available in the chain
 	// This is acceptable for MVP as the certificate chain is already validated
-	
+
 	// Note: Full CRL implementation is available in crl_client.go
 	// and can be integrated when issuer certificate is accessible
 	return nil

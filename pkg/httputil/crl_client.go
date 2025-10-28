@@ -147,4 +147,3 @@ func (c *CRLClient) isCertificateRevoked(cert *x509.Certificate, crl *x509.Revoc
 	}
 	return false
 }
-
