@@ -10,6 +10,28 @@ type Logger struct {
 	*zap.Logger
 }
 
+// Global logger instance
+var std *Logger
+
+func init() {
+	// Initialize with development logger
+	l, err := NewDevelopment()
+	if err != nil {
+		panic(err)
+	}
+	std = l
+}
+
+// SetGlobal sets the global logger instance
+func SetGlobal(l *Logger) {
+	std = l
+}
+
+// Global returns the global logger instance
+func Global() *Logger {
+	return std
+}
+
 // New creates a new logger with the specified level and format
 func New(level, format string) (*Logger, error) {
 	var config zap.Config
