@@ -5,7 +5,7 @@ import "time"
 // EnrollmentRequest represents a certificate enrollment request
 type EnrollmentRequest struct {
 	ID            int64     `json:"id"`
-	Type          string    `json:"type"` // acme, est, scep, manual
+	Type          string    `json:"type"`   // acme, est, scep, manual
 	Status        string    `json:"status"` // pending, approved, rejected, issued, failed
 	SubjectDN     string    `json:"subject_dn"`
 	SANs          []string  `json:"sans,omitempty"` // Subject Alternative Names
@@ -36,4 +36,3 @@ const (
 	EnrollmentTypeSCEP   = "scep"
 	EnrollmentTypeManual = "manual"
 )
-

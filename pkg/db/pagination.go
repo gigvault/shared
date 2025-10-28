@@ -59,4 +59,3 @@ func NewPageResponse(page, pageSize int, totalItems int64) PageResponse {
 		TotalPages: totalPages,
 	}
 }
-

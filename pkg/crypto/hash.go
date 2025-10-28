@@ -62,4 +62,3 @@ func VerifyHash(data []byte, expectedHash string, algorithm HashAlgorithm) (bool
 	}
 	return computedHash == expectedHash, nil
 }
-

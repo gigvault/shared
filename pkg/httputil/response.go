@@ -25,7 +25,7 @@ type ErrorInfo struct {
 func JSON(w http.ResponseWriter, status int, data interface{}) {
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(status)
-	
+
 	if err := json.NewEncoder(w).Encode(data); err != nil {
 		logger.Error("failed to encode JSON response", "error", err)
 	}
@@ -97,4 +97,3 @@ func InternalError(w http.ResponseWriter, message string) {
 func ServiceUnavailable(w http.ResponseWriter, message string) {
 	Error(w, http.StatusServiceUnavailable, "service_unavailable", message)
 }
-

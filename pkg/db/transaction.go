@@ -56,4 +56,3 @@ func ReadOnlyTxOptions() pgx.TxOptions {
 		AccessMode: pgx.ReadOnly,
 	}
 }
-

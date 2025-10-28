@@ -13,16 +13,16 @@ import (
 
 // CertificateRequest represents a request to issue a certificate
 type CertificateRequest struct {
-	Subject       pkix.Name
-	DNSNames      []string
+	Subject        pkix.Name
+	DNSNames       []string
 	EmailAddresses []string
-	IPAddresses   []string
-	NotBefore     time.Time
-	NotAfter      time.Time
-	KeyUsage      x509.KeyUsage
-	ExtKeyUsage   []x509.ExtKeyUsage
-	IsCA          bool
-	MaxPathLen    int
+	IPAddresses    []string
+	NotBefore      time.Time
+	NotAfter       time.Time
+	KeyUsage       x509.KeyUsage
+	ExtKeyUsage    []x509.ExtKeyUsage
+	IsCA           bool
+	MaxPathLen     int
 }
 
 // CreateCertificate creates a new X.509 certificate
@@ -144,11 +144,11 @@ func GetCertificateExpiry(certPEM string) (time.Time, error) {
 // CreateRootCA creates a self-signed root CA certificate
 func CreateRootCA(subject pkix.Name, key crypto.PrivateKey, publicKey crypto.PublicKey, validityYears int) ([]byte, error) {
 	req := &CertificateRequest{
-		Subject:   subject,
-		NotBefore: time.Now(),
-		NotAfter:  time.Now().AddDate(validityYears, 0, 0),
-		KeyUsage:  x509.KeyUsageCertSign | x509.KeyUsageCRLSign | x509.KeyUsageDigitalSignature,
-		IsCA:      true,
+		Subject:    subject,
+		NotBefore:  time.Now(),
+		NotAfter:   time.Now().AddDate(validityYears, 0, 0),
+		KeyUsage:   x509.KeyUsageCertSign | x509.KeyUsageCRLSign | x509.KeyUsageDigitalSignature,
+		IsCA:       true,
 		MaxPathLen: 1, // Allow one intermediate
 	}
 
@@ -158,11 +158,11 @@ func CreateRootCA(subject pkix.Name, key crypto.PrivateKey, publicKey crypto.Pub
 // CreateIntermediateCA creates an intermediate CA certificate signed by a root CA
 func CreateIntermediateCA(subject pkix.Name, publicKey crypto.PublicKey, rootCert *x509.Certificate, rootKey crypto.PrivateKey, validityYears int) ([]byte, error) {
 	req := &CertificateRequest{
-		Subject:   subject,
-		NotBefore: time.Now(),
-		NotAfter:  time.Now().AddDate(validityYears, 0, 0),
-		KeyUsage:  x509.KeyUsageCertSign | x509.KeyUsageCRLSign | x509.KeyUsageDigitalSignature,
-		IsCA:      true,
+		Subject:    subject,
+		NotBefore:  time.Now(),
+		NotAfter:   time.Now().AddDate(validityYears, 0, 0),
+		KeyUsage:   x509.KeyUsageCertSign | x509.KeyUsageCRLSign | x509.KeyUsageDigitalSignature,
+		IsCA:       true,
 		MaxPathLen: 0, // No further intermediates
 	}
 
@@ -182,16 +182,15 @@ func SignCSR(csrPEM string, caCert *x509.Certificate, caKey crypto.PrivateKey, v
 	}
 
 	req := &CertificateRequest{
-		Subject:     csr.Subject,
-		DNSNames:    csr.DNSNames,
+		Subject:        csr.Subject,
+		DNSNames:       csr.DNSNames,
 		EmailAddresses: csr.EmailAddresses,
-		NotBefore:   time.Now(),
-		NotAfter:    time.Now().AddDate(0, 0, validityDays),
-		KeyUsage:    x509.KeyUsageDigitalSignature | x509.KeyUsageKeyEncipherment,
-		ExtKeyUsage: []x509.ExtKeyUsage{x509.ExtKeyUsageServerAuth, x509.ExtKeyUsageClientAuth},
-		IsCA:        false,
+		NotBefore:      time.Now(),
+		NotAfter:       time.Now().AddDate(0, 0, validityDays),
+		KeyUsage:       x509.KeyUsageDigitalSignature | x509.KeyUsageKeyEncipherment,
+		ExtKeyUsage:    []x509.ExtKeyUsage{x509.ExtKeyUsageServerAuth, x509.ExtKeyUsageClientAuth},
+		IsCA:           false,
 	}
 
 	return CreateCertificate(req, csr.PublicKey, caCert, caKey)
 }
-

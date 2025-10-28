@@ -3,6 +3,7 @@ module github.com/gigvault/shared
 go 1.23
 
 require (
+	github.com/golang-jwt/jwt/v5 v5.2.0
 	github.com/google/uuid v1.5.0
 	github.com/jackc/pgx/v5 v5.5.0
 	go.uber.org/zap v1.26.0

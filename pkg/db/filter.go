@@ -91,4 +91,3 @@ func (fb *FilterBuilder) BuildWithPrefix(prefix string) (string, []interface{}) 
 	}
 	return strings.Replace(clause, "WHERE", prefix, 1), args
 }
-

@@ -19,7 +19,7 @@ type ECDSASignature struct {
 // Sign signs data with an ECDSA private key
 func Sign(data []byte, privateKey *ecdsa.PrivateKey) (string, error) {
 	hash := sha256.Sum256(data)
-	
+
 	r, s, err := ecdsa.Sign(rand.Reader, privateKey, hash[:])
 	if err != nil {
 		return "", fmt.Errorf("failed to sign data: %w", err)
@@ -52,7 +52,7 @@ func Verify(data []byte, signature string, publicKey *ecdsa.PublicKey) (bool, er
 	// Verify signature
 	hash := sha256.Sum256(data)
 	valid := ecdsa.Verify(publicKey, hash[:], sig.R, sig.S)
-	
+
 	return valid, nil
 }
 
@@ -103,4 +103,3 @@ func VerifyWithHash(data []byte, signature string, publicKey *ecdsa.PublicKey, h
 	valid := ecdsa.Verify(publicKey, hashed, sig.R, sig.S)
 	return valid, nil
 }
-

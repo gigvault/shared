@@ -31,4 +31,3 @@ func Fatal(msg string, keysAndValues ...interface{}) {
 func With(keysAndValues ...interface{}) *zap.SugaredLogger {
 	return std.Sugar().With(keysAndValues...)
 }
-
