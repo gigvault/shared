@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package gigvault.ocsp.v1;
 
-option go_package = "github.com/gigvault/shared/api/proto/ocsp;ocspb";
+option go_package = "github.com/gigvault/shared/api/proto/ocsp";
 
 import "google/protobuf/timestamp.proto";
 

@@ -4,7 +4,7 @@
 // 	protoc        v6.33.0
 // source: ca.proto
 
-package capb
+package ca
 
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
@@ -674,7 +674,7 @@ const file_ca_proto_rawDesc = "" +
 	"\aSignCSR\x12\x1e.gigvault.ca.v1.SignCSRRequest\x1a\x1f.gigvault.ca.v1.SignCSRResponse\x12_\n" +
 	"\x0eGetCertificate\x12%.gigvault.ca.v1.GetCertificateRequest\x1a&.gigvault.ca.v1.GetCertificateResponse\x12e\n" +
 	"\x10ListCertificates\x12'.gigvault.ca.v1.ListCertificatesRequest\x1a(.gigvault.ca.v1.ListCertificatesResponse\x12h\n" +
-	"\x11RevokeCertificate\x12(.gigvault.ca.v1.RevokeCertificateRequest\x1a).gigvault.ca.v1.RevokeCertificateResponseB.Z,github.com/gigvault/shared/api/proto/ca;capbb\x06proto3"
+	"\x11RevokeCertificate\x12(.gigvault.ca.v1.RevokeCertificateRequest\x1a).gigvault.ca.v1.RevokeCertificateResponseB)Z'github.com/gigvault/shared/api/proto/cab\x06proto3"
 
 var (
 	file_ca_proto_rawDescOnce sync.Once

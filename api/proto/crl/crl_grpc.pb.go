@@ -4,7 +4,7 @@
 // - protoc             v6.33.0
 // source: crl.proto
 
-package crlpb
+package crl
 
 import (
 	context "context"

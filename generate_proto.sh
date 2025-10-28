@@ -45,12 +45,14 @@ echo ""
 
 cd api/proto
 
-for proto in *.proto; do
-    if [ "$proto" != "*.proto" ]; then
-        echo "   📝 Generating $proto..."
+for service in ca crl ocsp; do
+    if [ -d "$service" ]; then
+        echo "   📝 Generating $service service..."
+        cd "$service"
         protoc --go_out=. --go_opt=paths=source_relative \
                --go-grpc_out=. --go-grpc_opt=paths=source_relative \
-               "$proto"
+               *.proto
+        cd ..
     fi
 done
 
@@ -62,7 +64,7 @@ echo ""
 
 # Check generated files
 echo "📂 Generated files:"
-ls -la api/proto/*.pb.go 2>/dev/null || echo "⚠️  .pb.go files not found"
+find api/proto -name "*.pb.go" -type f -exec ls -lh {} \; 2>/dev/null || echo "⚠️  .pb.go files not found"
 echo ""
 
 # Update dependencies

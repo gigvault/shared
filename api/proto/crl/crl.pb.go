@@ -4,7 +4,7 @@
 // 	protoc        v6.33.0
 // source: crl.proto
 
-package crlpb
+package crl
 
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
@@ -401,7 +401,7 @@ const file_crl_proto_rawDesc = "" +
 	"\rAddRevocation\x12%.gigvault.crl.v1.AddRevocationRequest\x1a&.gigvault.crl.v1.AddRevocationResponse\x12I\n" +
 	"\x06GetCRL\x12\x1e.gigvault.crl.v1.GetCRLRequest\x1a\x1f.gigvault.crl.v1.GetCRLResponse\x12U\n" +
 	"\n" +
-	"PublishCRL\x12\".gigvault.crl.v1.PublishCRLRequest\x1a#.gigvault.crl.v1.PublishCRLResponseB0Z.github.com/gigvault/shared/api/proto/crl;crlpbb\x06proto3"
+	"PublishCRL\x12\".gigvault.crl.v1.PublishCRLRequest\x1a#.gigvault.crl.v1.PublishCRLResponseB*Z(github.com/gigvault/shared/api/proto/crlb\x06proto3"
 
 var (
 	file_crl_proto_rawDescOnce sync.Once

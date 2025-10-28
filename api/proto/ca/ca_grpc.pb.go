@@ -4,7 +4,7 @@
 // - protoc             v6.33.0
 // source: ca.proto
 
-package capb
+package ca
 
 import (
 	context "context"

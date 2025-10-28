@@ -4,7 +4,7 @@
 // 	protoc        v6.33.0
 // source: ocsp.proto
 
-package ocspb
+package ocsp
 
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
@@ -401,7 +401,7 @@ const file_ocsp_proto_rawDesc = "" +
 	"\vOCSPService\x12]\n" +
 	"\fUpdateStatus\x12%.gigvault.ocsp.v1.UpdateStatusRequest\x1a&.gigvault.ocsp.v1.UpdateStatusResponse\x12Z\n" +
 	"\vCheckStatus\x12$.gigvault.ocsp.v1.CheckStatusRequest\x1a%.gigvault.ocsp.v1.CheckStatusResponse\x12l\n" +
-	"\x11BatchUpdateStatus\x12*.gigvault.ocsp.v1.BatchUpdateStatusRequest\x1a+.gigvault.ocsp.v1.BatchUpdateStatusResponseB1Z/github.com/gigvault/shared/api/proto/ocsp;ocspbb\x06proto3"
+	"\x11BatchUpdateStatus\x12*.gigvault.ocsp.v1.BatchUpdateStatusRequest\x1a+.gigvault.ocsp.v1.BatchUpdateStatusResponseB+Z)github.com/gigvault/shared/api/proto/ocspb\x06proto3"
 
 var (
 	file_ocsp_proto_rawDescOnce sync.Once

@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package gigvault.crl.v1;
 
-option go_package = "github.com/gigvault/shared/api/proto/crl;crlpb";
+option go_package = "github.com/gigvault/shared/api/proto/crl";
 
 import "google/protobuf/timestamp.proto";
 

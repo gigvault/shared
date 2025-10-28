@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package gigvault.ca.v1;
 
-option go_package = "github.com/gigvault/shared/api/proto/ca;capb";
+option go_package = "github.com/gigvault/shared/api/proto/ca";
 
 import "google/protobuf/timestamp.proto";
 

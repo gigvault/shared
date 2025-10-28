@@ -4,7 +4,7 @@
 // - protoc             v6.33.0
 // source: ocsp.proto
 
-package ocspb
+package ocsp
 
 import (
 	context "context"
