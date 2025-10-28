@@ -2,6 +2,7 @@ package httputil
 
 import (
 	"context"
+	"errors"
 	"net/http"
 	"time"
 
@@ -62,7 +63,7 @@ func RecoveryMiddleware(next http.Handler) http.Handler {
 					"path", r.URL.Path,
 					"method", r.Method,
 				)
-				InternalError(w, "Internal server error")
+				InternalError(w, errors.New("panic recovered"))
 			}
 		}()
 		next.ServeHTTP(w, r)

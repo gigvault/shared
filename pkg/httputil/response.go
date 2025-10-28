@@ -87,13 +87,3 @@ func NotFound(w http.ResponseWriter, message string) {
 func Conflict(w http.ResponseWriter, message string) {
 	Error(w, http.StatusConflict, "conflict", message)
 }
-
-// InternalError writes a 500 Internal Server Error response
-func InternalError(w http.ResponseWriter, message string) {
-	Error(w, http.StatusInternalServerError, "internal_error", message)
-}
-
-// ServiceUnavailable writes a 503 Service Unavailable response
-func ServiceUnavailable(w http.ResponseWriter, message string) {
-	Error(w, http.StatusServiceUnavailable, "service_unavailable", message)
-}

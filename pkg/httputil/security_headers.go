@@ -13,42 +13,42 @@ func SecurityHeadersMiddleware(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		// Prevent MIME sniffing
 		w.Header().Set("X-Content-Type-Options", "nosniff")
-		
+
 		// Prevent clickjacking
 		w.Header().Set("X-Frame-Options", "DENY")
-		
+
 		// XSS Protection
 		w.Header().Set("X-XSS-Protection", "1; mode=block")
-		
+
 		// HSTS (HTTP Strict Transport Security)
 		// Only add if using HTTPS
 		if r.TLS != nil {
 			w.Header().Set("Strict-Transport-Security", "max-age=31536000; includeSubDomains; preload")
 		}
-		
+
 		// Content Security Policy
-		w.Header().Set("Content-Security-Policy", 
+		w.Header().Set("Content-Security-Policy",
 			"default-src 'self'; "+
-			"script-src 'self' 'unsafe-inline' 'unsafe-eval'; "+
-			"style-src 'self' 'unsafe-inline'; "+
-			"img-src 'self' data: https:; "+
-			"font-src 'self' data:; "+
-			"connect-src 'self'; "+
-			"frame-ancestors 'none'; "+
-			"base-uri 'self'; "+
-			"form-action 'self'")
-		
+				"script-src 'self' 'unsafe-inline' 'unsafe-eval'; "+
+				"style-src 'self' 'unsafe-inline'; "+
+				"img-src 'self' data: https:; "+
+				"font-src 'self' data:; "+
+				"connect-src 'self'; "+
+				"frame-ancestors 'none'; "+
+				"base-uri 'self'; "+
+				"form-action 'self'")
+
 		// Referrer Policy
 		w.Header().Set("Referrer-Policy", "strict-origin-when-cross-origin")
-		
+
 		// Permissions Policy (formerly Feature Policy)
-		w.Header().Set("Permissions-Policy", 
+		w.Header().Set("Permissions-Policy",
 			"geolocation=(), microphone=(), camera=(), payment=()")
-		
+
 		// Remove server header
 		w.Header().Del("Server")
 		w.Header().Del("X-Powered-By")
-		
+
 		next.ServeHTTP(w, r)
 	})
 }
@@ -72,10 +72,10 @@ func NewCSRFProtection(expiry time.Duration) *CSRFProtection {
 		tokens: make(map[string]CSRFToken),
 		expiry: expiry,
 	}
-	
+
 	// Start cleanup goroutine
 	go csrf.cleanup()
-	
+
 	return csrf
 }
 
@@ -85,16 +85,16 @@ func (c *CSRFProtection) GenerateToken() (string, error) {
 	if _, err := rand.Read(bytes); err != nil {
 		return "", err
 	}
-	
+
 	token := base64.URLEncoding.EncodeToString(bytes)
-	
+
 	c.mu.Lock()
 	c.tokens[token] = CSRFToken{
 		Token:     token,
 		ExpiresAt: time.Now().Add(c.expiry),
 	}
 	c.mu.Unlock()
-	
+
 	return token, nil
 }
 
@@ -102,16 +102,16 @@ func (c *CSRFProtection) GenerateToken() (string, error) {
 func (c *CSRFProtection) ValidateToken(token string) bool {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
-	
+
 	csrfToken, exists := c.tokens[token]
 	if !exists {
 		return false
 	}
-	
+
 	if time.Now().After(csrfToken.ExpiresAt) {
 		return false
 	}
-	
+
 	return true
 }
 
@@ -126,7 +126,7 @@ func (c *CSRFProtection) DeleteToken(token string) {
 func (c *CSRFProtection) cleanup() {
 	ticker := time.NewTicker(time.Minute)
 	defer ticker.Stop()
-	
+
 	for range ticker.C {
 		c.mu.Lock()
 		now := time.Now()
@@ -148,24 +148,24 @@ func CSRFMiddleware(csrf *CSRFProtection) func(http.Handler) http.Handler {
 				next.ServeHTTP(w, r)
 				return
 			}
-			
+
 			// Check for CSRF token in header
 			token := r.Header.Get("X-CSRF-Token")
 			if token == "" {
 				// Also check form/query parameter
 				token = r.FormValue("csrf_token")
 			}
-			
+
 			if token == "" {
 				Forbidden(w, "CSRF token required")
 				return
 			}
-			
+
 			if !csrf.ValidateToken(token) {
 				Forbidden(w, "Invalid or expired CSRF token")
 				return
 			}
-			
+
 			next.ServeHTTP(w, r)
 		})
 	}
@@ -179,9 +179,8 @@ func GetCSRFTokenHandler(csrf *CSRFProtection) http.HandlerFunc {
 			Error(w, http.StatusInternalServerError, "internal_error", "Failed to generate CSRF token")
 			return
 		}
-		
+
 		w.Header().Set("Content-Type", "application/json")
 		w.Write([]byte(`{"csrf_token":"` + token + `"}`))
 	}
 }
-
