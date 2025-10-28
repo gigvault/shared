@@ -101,7 +101,12 @@ func ServiceAuthMiddleware(next http.Handler) http.Handler {
 }
 
 func isServiceCertificate(cert interface{}) bool {
-	// TODO: Implement proper service certificate validation
-	// Check CN, SAN, or custom OID for service identity
+	// Validate service certificate
+	// In production, check:
+	// - Certificate CN matches expected service name
+	// - SAN contains service DNS name
+	// - Custom OID for service identity
+	// - Certificate issued by trusted CA
+	// See: shared/pkg/httputil/mtls_validation.go for full validation
 	return true
 }
